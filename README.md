@@ -1,6 +1,5 @@
 # crawl
 
-- 爬虫 🕷 日记：记录自己爬虫的经过与心得，拓展自己的 web 的视野
 - version：python 3.7.4
 - IDE：pyCharm
 
