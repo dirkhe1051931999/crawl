@@ -14,7 +14,7 @@ def get_html(url):
 def get_content(url):
   content = []
   html = get_html(url)
-  soup = BeautifulSoup(html, 'lxml', )
+  soup = BeautifulSoup(html, 'html.parser')
   liTags = soup.find_all('li', class_='j_thread_list clearfix')
   for li in liTags:
     obj = {}
@@ -26,7 +26,7 @@ def get_content(url):
       obj['replyNum'] = li.find('span', class_='threadlist_rep_num center_text').text.strip()
       content.append(obj)
     except Exception as e:
-      print('³öÁËµãĞ¡ÎÊÌâ')
+      print('å‡ºäº†ç‚¹å°é—®é¢˜')
       print(e)
   return content
 
@@ -34,21 +34,21 @@ def get_content(url):
 def out_file(dict):
   with open('data.txt', 'a+', encoding='utf-8') as f:
     for comment in dict:
-      f.write('±êÌâ£º {} \t Á´½Ó£º{} \t ·¢ÌûÈË£º{} \t ·¢ÌûÊ±¼ä£º{} \t »Ø¸´ÊıÁ¿£º {} \n'.format(
+      f.write('æ ‡é¢˜ï¼š {} \t é“¾æ¥ï¼š{} \t å‘å¸–äººï¼š{} \t å‘å¸–æ—¶é—´ï¼š{} \t å›å¤æ•°é‡ï¼š {} \n'.format(
         comment['title'], comment['link'], comment['name'], comment['time'], comment['replyNum']))
 
-  print('ÅÀ³æÍê³É')
+  print('çˆ¬è™«å®Œæˆ')
 
 
 def main(base_url, deep):
   list = []
-  # »ñÈ¡Ò³Âë
+  # è·å–é¡µç 
   for i in range(0, deep):
     list.append(base_url + '&pn=' + str(50 * i))
-  # Ñ­»·ÇëÇó
+  # å¾ªç¯è¯·æ±‚
   for url in list:
     content = get_content(url)
-    # Ğ´ÈëÎÄ¼şÖĞ
+    # å†™å…¥æ–‡ä»¶ä¸­
     out_file(content)
 
 
